@@ -72,29 +72,140 @@
   isolation: isolate;
 }
 
-.opening-screen::before {
-  content: "";
+/* Atmosphere controls */
+
+.atmosphere-controls {
+  position: absolute;
+  z-index: 3;
+  bottom: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  background: rgba(10, 20, 35, 0.45);
+  backdrop-filter: blur(12px);
+}
+
+.atmosphere-controls button {
+  border: none;
+  border-radius: 20px;
+  padding: 9px 20px;
+  color: rgba(255, 255, 255, 0.65);
+  background: transparent;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.atmosphere-controls button:hover,
+.atmosphere-controls button.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+
+.opening-screen {
+  isolation: isolate;
+}
+
+.background-container {
   position: absolute;
   inset: 0;
   z-index: -2;
+  overflow: hidden;
+}
 
-  background-image: url("../assets/images/winter-village.jpg");
+.background-image {
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
+  opacity: 0;
   transform: scale(1.02);
+  transition: opacity 2.5s ease;
 }
 
-.opening-screen::after {
-  content: "";
+.background-image.active {
+  opacity: 1;
+}
+
+.background-overlay {
   position: absolute;
   inset: 0;
   z-index: -1;
-
+  pointer-events: none;
   background: linear-gradient(
     to bottom,
-    rgba(10, 20, 35, 0.25),
-    rgba(10, 20, 35, 0.35)
+    rgba(10, 20, 35, 0.12),
+    rgba(10, 20, 35, 0.38)
   );
+}
+
+.opening-title,
+.opening-tagline,
+.atmosphere-controls {
+  z-index: 2;
+}
+
+
+.audio-controls {
+  position: absolute;
+  z-index: 5;
+  top: 32px;
+  right: 35px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  background: rgba(10, 20, 35, 0.5);
+  backdrop-filter: blur(14px);
+  color: #e8eef5;
+}
+
+.audio-controls button {
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.audio-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 10px;
+  text-transform: capitalize;
+}
+
+.audio-controls input {
+  width: 75px;
+  accent-color: #d5a66f;
+}
+
+
+.fullscreen-button {
+  position: absolute;
+  z-index: 5;
+  top: 38px;
+  left: 35px;
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  color: #e8eef5;
+  background: rgba(10, 20, 35, 0.45);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  transition: background 0.3s ease;
+}
+
+.fullscreen-button:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
