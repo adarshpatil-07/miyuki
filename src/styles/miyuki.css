@@ -1,0 +1,100 @@
+
+.opening-screen {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #101d2d;
+  flex-direction: column;
+}
+
+.opening-title {
+  position: absolute;
+  color: #e8eef5;
+  font-family: Georgia, serif;
+  font-size: clamp(4rem, 9vw, 8rem);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+.opening-title.visible {
+  opacity: 1;
+}
+
+.opening-title.hidden {
+  opacity: 0;
+}
+
+.english-title {
+  font-size: clamp(4rem, 8vw, 7rem);
+  letter-spacing: 0.04em;
+}
+
+.opening-tagline {
+  position: absolute;
+  margin-top: 12rem;
+  color: rgba(232, 238, 245, 0.75);
+  font-size: 0.9rem;
+  letter-spacing: 0.22em;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.opening-tagline.visible {
+  opacity: 1;
+}
+
+.opening-tagline.hidden {
+  opacity: 0;
+}
+
+.snowfall-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.opening-title,
+.opening-tagline {
+  z-index: 2;
+}
+
+
+.opening-screen {
+  isolation: isolate;
+}
+
+.opening-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  background-image: url("../assets/images/winter-village.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transform: scale(1.02);
+}
+
+.opening-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 20, 35, 0.25),
+    rgba(10, 20, 35, 0.35)
+  );
+}
