@@ -1,4 +1,3 @@
-
 .opening-screen {
   position: relative;
   display: flex;
@@ -7,12 +6,14 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #101d2d;
   flex-direction: column;
+  isolation: isolate;
+  background: #101d2d;
 }
 
 .opening-title {
   position: absolute;
+  z-index: 2;
   color: #e8eef5;
   font-family: Georgia, serif;
   font-size: clamp(4rem, 9vw, 8rem);
@@ -37,6 +38,7 @@
 
 .opening-tagline {
   position: absolute;
+  z-index: 2;
   margin-top: 12rem;
   color: rgba(232, 238, 245, 0.75);
   font-size: 0.9rem;
@@ -51,64 +53,6 @@
 
 .opening-tagline.hidden {
   opacity: 0;
-}
-
-.snowfall-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.opening-title,
-.opening-tagline {
-  z-index: 2;
-}
-
-
-.opening-screen {
-  isolation: isolate;
-}
-
-/* Atmosphere controls */
-
-.atmosphere-controls {
-  position: absolute;
-  z-index: 3;
-  bottom: 42px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 12px;
-  padding: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 30px;
-  background: rgba(10, 20, 35, 0.45);
-  backdrop-filter: blur(12px);
-}
-
-.atmosphere-controls button {
-  border: none;
-  border-radius: 20px;
-  padding: 9px 20px;
-  color: rgba(255, 255, 255, 0.65);
-  background: transparent;
-  text-transform: capitalize;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.atmosphere-controls button:hover,
-.atmosphere-controls button.active {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.15);
-}
-
-
-.opening-screen {
-  isolation: isolate;
 }
 
 .background-container {
@@ -145,67 +89,298 @@
   );
 }
 
-.opening-title,
-.opening-tagline,
-.atmosphere-controls {
-  z-index: 2;
+.snowfall-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
+.audio-controls,
+.fullscreen-button,
+.snowfall-controls,
+.atmosphere-controls {
+  color: rgba(248, 250, 255, 0.9);
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.75);
+}
 
 .audio-controls {
   position: absolute;
   z-index: 5;
-  top: 32px;
-  right: 35px;
+  top: 30px;
+  right: 34px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 12px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 30px;
-  background: rgba(10, 20, 35, 0.5);
-  backdrop-filter: blur(14px);
-  color: #e8eef5;
+  gap: 14px;
+  padding: 8px 0;
+  font-size: 11px;
 }
 
-.audio-controls button {
-  border: none;
-  background: transparent;
+.audio-controls button,
+.snowfall-play {
+  border: 0;
+  padding: 5px 0;
   color: inherit;
+  background: transparent;
+  font-size: 11px;
   cursor: pointer;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.audio-controls button:hover,
+.snowfall-play:hover {
+  color: #fff;
 }
 
 .audio-controls label {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
+  min-width: 70px;
   font-size: 10px;
   text-transform: capitalize;
 }
 
-.audio-controls input {
-  width: 75px;
-  accent-color: #d5a66f;
+.audio-controls input[type="range"] {
+  width: 76px;
 }
-
 
 .fullscreen-button {
   position: absolute;
   z-index: 5;
-  top: 38px;
-  left: 35px;
-  padding: 10px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 24px;
-  color: #e8eef5;
-  background: rgba(10, 20, 35, 0.45);
-  backdrop-filter: blur(12px);
+  top: 30px;
+  left: 34px;
+  border: 0;
+  padding: 8px 0;
+  color: inherit;
+  background: transparent;
+  font-size: 11px;
+  letter-spacing: 0.04em;
   cursor: pointer;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  transition: background 0.3s ease;
+  transition: color 0.2s ease;
 }
 
 .fullscreen-button:hover {
-  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.snowfall-controls {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  right: 34px;
+  display: flex;
+  width: 152px;
+  flex-direction: column;
+  gap: 13px;
+  transform: translateY(-50%);
+  font-family: Georgia, serif;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  pointer-events: auto;
+}
+
+.snowfall-range {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.snowfall-range > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.snowfall-range output {
+  color: rgba(248, 250, 255, 0.68);
+  font-variant-numeric: tabular-nums;
+}
+
+.snowfall-range input[type="range"],
+.audio-controls input[type="range"] {
+  height: 2px;
+  margin: 4px 0;
+  appearance: none;
+  border-radius: 2px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.48);
+  cursor: pointer;
+}
+
+.snowfall-range input[type="range"] {
+  width: 100%;
+}
+
+.snowfall-range input[type="range"]::-webkit-slider-thumb,
+.audio-controls input[type="range"]::-webkit-slider-thumb {
+  width: 8px;
+  height: 8px;
+  appearance: none;
+  border: 0;
+  border-radius: 50%;
+  background: #e8eef5;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
+}
+
+.snowfall-range input[type="range"]::-moz-range-thumb,
+.audio-controls input[type="range"]::-moz-range-thumb {
+  width: 8px;
+  height: 8px;
+  border: 0;
+  border-radius: 50%;
+  background: #e8eef5;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
+}
+
+.snowfall-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(248, 250, 255, 0.78);
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.snowfall-toggle input {
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  accent-color: #e8eef5;
+  cursor: pointer;
+}
+
+.snowfall-play {
+  align-self: flex-start;
+  font-family: Georgia, serif;
+  letter-spacing: 0.08em;
+}
+
+.atmosphere-controls {
+  position: absolute;
+  z-index: 3;
+  bottom: 32px;
+  left: 50%;
+  display: flex;
+  gap: 18px;
+  transform: translateX(-50%);
+}
+
+.atmosphere-controls button {
+  position: relative;
+  border: 0;
+  padding: 8px 2px;
+  color: rgba(248, 250, 255, 0.72);
+  background: transparent;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.atmosphere-controls button:hover,
+.atmosphere-controls button.active {
+  color: #fff;
+}
+
+.atmosphere-controls button.active::after {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.85);
+  content: "";
+}
+
+.audio-controls button:focus-visible,
+.fullscreen-button:focus-visible,
+.snowfall-controls :focus-visible,
+.atmosphere-controls button:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 4px;
+}
+
+@media (max-width: 680px) {
+  .fullscreen-button {
+    top: 16px;
+    left: 16px;
+  }
+
+  .audio-controls {
+    top: 54px;
+    right: 16px;
+    left: 16px;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  .audio-controls label {
+    flex: 1 1 55px;
+    min-width: 0;
+    max-width: 86px;
+  }
+
+  .audio-controls input[type="range"] {
+    width: 100%;
+  }
+
+  .snowfall-controls {
+    top: 52%;
+    right: 18px;
+    width: min(152px, calc(100vw - 36px));
+    gap: 11px;
+  }
+
+  .atmosphere-controls {
+    bottom: 18px;
+    gap: 14px;
+  }
+}
+
+@media (max-height: 480px) {
+  .audio-controls {
+    top: 8px;
+    right: 16px;
+    left: 80px;
+    padding: 0;
+  }
+
+  .snowfall-controls {
+    top: auto;
+    right: 16px;
+    bottom: 42px;
+    left: 16px;
+    display: grid;
+    width: auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    column-gap: 14px;
+    row-gap: 6px;
+    transform: none;
+  }
+
+  .snowfall-toggle {
+    grid-column: span 2;
+  }
+
+  .snowfall-play {
+    justify-self: end;
+  }
+
+  .atmosphere-controls {
+    bottom: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .background-image,
+  .opening-title,
+  .opening-tagline {
+    transition-duration: 0.01ms;
+  }
 }

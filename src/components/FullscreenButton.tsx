@@ -29,7 +29,13 @@ export default function FullscreenButton() {
   }, []);
 
   return (
-    <button className="fullscreen-button" onClick={toggleFullscreen}>
+    <button
+      className="fullscreen-button"
+      type="button"
+      onClick={toggleFullscreen}
+      aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+      aria-pressed={isFullscreen}
+    >
       {isFullscreen ? "Exit fullscreen" : "Fullscreen"}
     </button>
   );

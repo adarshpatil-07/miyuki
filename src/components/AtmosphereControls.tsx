@@ -11,11 +11,13 @@ export default function AtmosphereControls({
   onChange,
 }: AtmosphereControlsProps) {
   return (
-    <div className="atmosphere-controls">
+    <div className="atmosphere-controls" role="group" aria-label="Atmosphere">
       {options.map((option) => (
         <button
           key={option}
           className={atmosphere === option ? "active" : ""}
+          type="button"
+          aria-pressed={atmosphere === option}
           onClick={() => onChange(option)}
         >
           {option}

@@ -21,12 +21,19 @@ export default function AudioControls({
   onVolumeChange,
 }: AudioControlsProps) {
   return (
-    <div className="audio-controls">
+    <div className="audio-controls" role="group" aria-label="Audio controls">
       {!started ? (
-        <button onClick={onStart}>Enable sound</button>
+        <button type="button" onClick={onStart} aria-label="Enable sound">
+          Enable sound
+        </button>
       ) : (
         <>
-          <button onClick={onMute}>
+          <button
+            type="button"
+            onClick={onMute}
+            aria-label={muted ? "Unmute audio" : "Mute audio"}
+            aria-pressed={muted}
+          >
             {muted ? "Unmute" : "Mute"}
           </button>
 
@@ -41,6 +48,7 @@ export default function AudioControls({
                 max="1"
                 step="0.01"
                 value={volumes[track]}
+                aria-label={`${track} volume`}
                 onChange={(event) =>
                   onVolumeChange(track, Number(event.target.value))
                 }
