@@ -40,7 +40,7 @@ export default function Snowfall() {
     setDensity(value);
 
     const { width, height } = dimensionsRef.current;
-    const targetCount = Math.round(value * 1.8);
+    const targetCount = Math.round(value * 2.5);
     const flakes = flakesRef.current;
 
     while (flakes.length < targetCount) {
