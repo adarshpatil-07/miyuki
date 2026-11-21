@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://miyuki-one.vercel.app/">
-    <img src="YOUR_GIF_LINK_HERE" alt="Miyuki live website preview" width="100%" />
+    <img width="1344" height="628" alt="image" src="https://github.com/user-attachments/assets/f701ff11-a6b2-4edf-bb0f-d715826f9688" />
   </a>
   <br />
   <a href="https://miyuki-one.vercel.app/"><strong>View Live Site ↗</strong></a>
